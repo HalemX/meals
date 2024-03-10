@@ -1,0 +1,23 @@
+<template>
+  <div>
+    <meals-item
+      v-for="meal of meals"
+      :key="meal.idMeal"
+      :meals="meals"
+    ></meals-item>
+    <div v-if="!meals.length" class="flex justify-center text-gray-600">
+      There No Meals of This ingredient.
+    </div>
+  </div>
+</template>
+
+<script>
+import MealsItem from "./MealsItem.vue";
+
+export default {
+  components: {
+    MealsItem,
+  },
+  props: ["meals"],
+};
+</script>

@@ -1,0 +1,34 @@
+<template>
+  <div>
+    <div class="p-8 pb-0 text-[#dc2626]">
+      <h1 class="text-4xl font-bold mb-4">Random Meals</h1>
+    </div>
+    <meals-item></meals-item>
+  </div>
+</template>
+
+<script>
+import { onMounted, ref } from "vue";
+import axiosClient from "../../axiosClient";
+
+import MealsItem from "../../components/meals_components/MealsItem.vue";
+
+export default {
+  components: {
+    MealsItem,
+  },
+  setup() {
+    const meals = ref([]);
+
+    onMounted(async () => {
+      for (let i = 0; i < 10; i++) {
+        axiosClient
+          .get(`random.php`)
+          .then(({ data }) => meals.value.push(data.meals[0]));
+      }
+    });
+
+    return { meals };
+  },
+};
+</script>
